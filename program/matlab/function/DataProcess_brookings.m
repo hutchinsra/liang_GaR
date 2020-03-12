@@ -5,8 +5,8 @@ function [NewData, OldData, UpdateData] = DataProcess_brookings(aux)
     VarNames = aux.Model;
 
     %% Read Table
-    TempTable = readtable(InputFileName, 'sheet', 'UseData');
-    DataTable = table2timetable(TempTable, 'RowTimes', 'date');
+    TempTable = readtable(InputFileName, 'sheet', 'UseData'); %Read in raw data
+    DataTable = table2timetable(TempTable, 'RowTimes', 'date'); %Convert to Matlab time-table
     % FCI
     TempTable = get_fci_brookings(aux);
     DataTable = synchronize(DataTable, TempTable);
@@ -26,11 +26,11 @@ function [NewData, OldData, UpdateData] = DataProcess_brookings(aux)
     DataTable.creditGDP = DataTable.credGDP/100;
     DataTable{2:end, 'dcreditGDP'} = diff(DataTable.creditGDP);
     DataTable.dcreditGDP(1) = NaN;
-    DataTable.CredGr = movavg(DataTable.dcreditGDP, 'simple', 8);
+    DataTable.CredGr = movavg_brookings(DataTable.dcreditGDP, 'simple', 8);
 
     % fci
     OldData = rmmissing(DataTable);
-    OldData.fci = normalize(log(OldData.FCI + 1 - min(OldData.FCI)));
+    OldData.fci = normalize_brookings(log(OldData.FCI + 1 - min(OldData.FCI)));
     DataTable = synchronize(DataTable, OldData(:, 'fci'));
     % read weekly NFCI
     TempTable = readtable(aux.InputFileName, 'sheet', 'NFCI_weekly');
