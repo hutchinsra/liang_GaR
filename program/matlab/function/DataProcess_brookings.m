@@ -13,7 +13,7 @@ function [NewData, OldData, UpdateData] = DataProcess_brookings(aux)
 
     %% Transformation
     % GDPGr
-    DataTable.lgdp = 4*log(DataTable.gdp);
+    DataTable.lgdp = 4*log(DataTable.gdp); %Annualized log(GDP)
     DataTable{2:end, 'dlgdp'} = diff(DataTable.lgdp);
     DataTable.dlgdp(1) = NaN;
     for h = 1:12
