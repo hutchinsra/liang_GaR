@@ -31,18 +31,18 @@ y_true = 1;       % 1: Include y[t]; 0: Do not include y[t]
 %% ----------------------------------LOAD DATA----------------------------------------
 TempTable = readtable(InputFileName, 'Sheet', 'FCI_XData'); %Quarterly data on fins vars
 XTable = table2timetable(TempTable, 'RowTimes', 'qdate'); %Transform table to timetable
-xdata = XTable{:, :}; %Extract data without the time variable
+xdata = XTable{:, :}; %Extract raw data without the time variable
 xnames = XTable.Properties.VariableNames; %Copy variable names
 
 %**************************************************************************
 %**************************************************************************
 TempTable = readtable(InputFileName, 'Sheet', 'FCI_YData'); %Quarterly data on GDP, inflation, and financial condition
 YTable = table2timetable(TempTable, 'RowTimes', 'qdate'); %Transform table to timetable
-ydata = YTable{:, 1:end-1}; %Extract data without the time variable and FCI variable
+ydata = YTable{:, 1:end-1}; %Extract raw data without the time variable and FCI variable
 FSI = YTable{:, 'FCI'}; %Extract FCI variable
 ynames = YTable.Properties.VariableNames(1:end-1); %Copy variable names
 
-namesXY = [ynames'; xnames']; %Full list of variable names
+namesXY = [ynames'; xnames']; %Full list of variable names (concat XY names)
 % Demean and standardize data (needed to extract Principal Components)
 xdata = standardize_miss(xdata) + 1e-10 ; %Standardize data so [mu,sig] = [0,1] ignoring missing values
 xdata(isnan(xdata)) = 0; %Replace missing with 0

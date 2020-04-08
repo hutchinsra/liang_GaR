@@ -52,11 +52,11 @@ function [NewData, OldData, UpdateData] = DataProcess_brookings(aux)
             newfci(i) = tempfci(i); %first element of new fci is first element of fci
         else
             newfci(i) = tempnfci(i)/tempnfci(i-1)*newfci(i-1);
-            %Fill in the FCI series by growing FCI at the NFCI growth rate to get newfci
+            %Calculate the growth rate of NFCI (ie,
+            %tempnfci(i)/tempnfci(i-1)) and g
         end
     end
     DataTable.fci(find(~isnan(DataTable.fci), 1, 'last')-1:end) = newfci;
-    
     % Create Dummy
     OldData = OldData(OldRange, :);
     Treshold.high_credit = prctile(OldData.CredGr, 70);
