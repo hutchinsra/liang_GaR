@@ -1,6 +1,6 @@
 % US only
 close all; clear all; clc;
-aux.MainPath = [pwd,'\'];
+aux.MainPath = [pwd,'/'];
 cd(aux.MainPath)
 ENVIROMENT;
 

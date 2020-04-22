@@ -1,7 +1,7 @@
 % US only
 close all; clear all; clc;
-aux.MainPath = 'V:\jcheng\liang_GaR\'; %Add main file path to aux-structure
-aux.MatlabPath = [aux.MainPath,'program\matlab\']; %Add matlab file path to aux-structure
+aux.MainPath = '/Users/malcalakovalski/Documents/GitHub/liang_GaR/'; %Add main file path to aux-structure
+aux.MatlabPath = [aux.MainPath,'program/matlab/']; %Add matlab file path to aux-structure
 cd(aux.MatlabPath) %Change pwd to matlab folder
 ENVIROMENT_brookings; %Load in environment variables
 
