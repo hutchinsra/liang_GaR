@@ -1,6 +1,7 @@
 % US only
 close all; clear all; clc;
-aux.MainPath = '/Users/malcalakovalski/Documents/GitHub/liang_GaR/'; %Add main file path to aux-structure
+% aux.MainPath = '/Users/malcalakovalski/Documents/GitHub/liang_GaR/'; %Add main file path to aux-structure
+aux.MainPath = 'V:/jcheng/liang_GaR/'; 
 aux.MatlabPath = [aux.MainPath,'program/matlab/']; %Add matlab file path to aux-structure
 cd(aux.MatlabPath) %Change pwd to matlab folder
 ENVIROMENT_brookings; %Load in environment variables
@@ -28,7 +29,7 @@ aux.W_bs = 4;                   % Specify the width of bootstrap block
 [Params.NewData, Params.OldData, Params.UpdateData] = DataProcess_brookings(aux);
 
 % 2. Growth-at-Risk: Time Series
-get_gar_timeseries(aux, Params);
+get_gar_ts_brookings(aux, Params);
 
 % 3. Coefficient with Bootstrap
 get_gar_coefficient(aux, Params);

@@ -14,14 +14,14 @@ cd(aux.MainPath) %Change pwd to Main folder
 if exist('data','dir')==0
     mkdir data
 end %Create folder data if it does not already exist
-aux.DataPath = [aux.MainPath, 'data\']; %Add data file path to aux-structure
+aux.DataPath = [aux.MainPath, 'data/']; %Add data file path to aux-structure
 addpath(aux.DataPath) %Add data folder to search path
 
 if exist('Output', 'dir') == 0
     mkdir('Output')
 end %Create folder output if it does not already exist
 addpath('Output') %Add output folder to search path
-aux.OutPath = [aux.MainPath, 'Output\']; %Add output file path to aux-structure
+aux.OutPath = [aux.MainPath, 'Output/']; %Add output file path to aux-structure
 
 % if exist(['output\', aux.OutFolderName],'dir')==0
 %     mkdir(['output\', aux.OutFolderName])
