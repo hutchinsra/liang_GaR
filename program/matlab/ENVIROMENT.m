@@ -13,14 +13,16 @@ addpath([aux.MainPath,'function'])
 %     mkdir data
 % end
 % aux.DataPath = [aux.MainPath, 'data\'];
-aux.DataPath = [aux.MainPath, 'data\']; %Add data file path to aux-structure
+%aux.DataPath = [aux.MainPath, 'data\']; %Add data file path to aux-structure
+aux.DataPath = [aux.MainPath, 'data/']; %Add data file path to aux-structure
 addpath(aux.DataPath) %Add data folder to search path
 
 if exist('Output', 'dir') == 0
     mkdir('Output')
 end
 addpath('Output')
-aux.OutPath = [aux.MainPath, 'Output\'];
+%aux.OutPath = [aux.MainPath, 'Output\'];
+aux.OutPath = [aux.MainPath, 'Output/'];
 
 % if exist(['output\', aux.OutFolderName],'dir')==0
 %     mkdir(['output\', aux.OutFolderName])

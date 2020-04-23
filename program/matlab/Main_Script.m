@@ -1,14 +1,15 @@
 % US only
 close all; clear all; clc;
 
-aux.MainPath = [pwd,'/'];
-cd(aux.MainPath)
+aux.MainPath = '/Users/malcalakovalski/Documents/GitHub/liang_GaR/';
+aux.MatlabPath = [aux.MainPath,'program/matlab/']; %Add matlab file path to aux-structure
+cd(aux.MatlabPath) %Change pwd to matlab folder
 
 % aux.MainPath = [pwd,'\'];
 % cd(aux.MainPath)
-aux.MainPath = 'V:\jcheng\liang_GaR\'; %Add main file path to aux-structure
-aux.MatlabPath = [aux.MainPath,'program\matlab\']; %Add matlab file path to aux-structure
-cd(aux.MatlabPath) %Change pwd to matlab folder
+%aux.MainPath = 'V:\jcheng\liang_GaR\'; %Add main file path to aux-structure
+%aux.MatlabPath = [aux.MainPath,'program\matlab\']; %Add matlab file path to aux-structure
+%cd(aux.MatlabPath) %Change pwd to matlab folder
 
 ENVIROMENT;
 
