@@ -1,7 +1,15 @@
 % US only
 close all; clear all; clc;
+<<<<<<< HEAD
 aux.MainPath = [pwd,'/'];
 cd(aux.MainPath)
+=======
+% aux.MainPath = [pwd,'\'];
+% cd(aux.MainPath)
+aux.MainPath = 'V:\jcheng\liang_GaR\'; %Add main file path to aux-structure
+aux.MatlabPath = [aux.MainPath,'program\matlab\']; %Add matlab file path to aux-structure
+cd(aux.MatlabPath) %Change pwd to matlab folder
+>>>>>>> 27efec6a766ae1591b16f91f0275fc39df8cc1a2
 ENVIROMENT;
 
 aux.InputFileName = 'InputData.xlsx'; 
