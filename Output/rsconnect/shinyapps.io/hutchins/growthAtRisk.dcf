@@ -1,0 +1,12 @@
+name: growthAtRisk
+title: growthAtRisk
+username:
+account: hutchins
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2202931
+bundleId: 3077647
+url: https://hutchins.shinyapps.io/growthAtRisk/
+when: 1588093016.97183
+asMultiple: FALSE
+asStatic: FALSE
