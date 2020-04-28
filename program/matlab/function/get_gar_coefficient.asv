@@ -52,12 +52,14 @@ function [] = get_gar_coefficient(aux, Params)
         varname = char(Model{i_var});
         for i_q = 1:length(QQ)
             qq = QQ(i_q);
-            line1_tt = cell2table([{[num2str(qq*100), 'th Percentile Coefficient: ', varname]}, repmat({''}, 1, 11)]);
+            temp = table([{[num2str(qq*100), 'th Percentile Coefficient: ', varname]}, repmat({''}, 1, 11)]);
+            line1_tt = table2array(temp);
             benchmark_val = transpose(BB_benchmark(:, i_var, i_q));
             std_val = transpose(std_bs(:, i_var, i_q));
             ub_val = benchmark_val + std_val;
             lb_val = benchmark_val - std_val;
-            data_tt = array2table([ub_val; benchmark_val; lb_val]);
+            temp = 
+            data_tt = splitvars(table([ub_val; benchmark_val; lb_val]));
             data_tt.Properties.VariableNames = HorizonNames;
             data_tt.Properties.RowNames = {'ub', 'bb', 'lb'};
             writetable(line1_tt, OutputFile, 'sheet', 'Coefficient_underlying', ...
