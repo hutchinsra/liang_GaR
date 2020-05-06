@@ -1,4 +1,4 @@
-function [] = get_gar_coefficient(aux, Params)
+function [] = get_gar_coef_brookings(aux, Params)
     % Extract aux and Params variables
     W_bs = aux.W_bs;
     N_bs = aux.N_bs;
@@ -44,28 +44,29 @@ function [] = get_gar_coefficient(aux, Params)
 
     %% Write Result
     % create variable names
-    HorizonNames = [];
-    for h = 1:12
-        HorizonNames{h} = ['H', num2str(h)];
-    end
-    for i_var = 1:length(Model)
+    HorizonNames = repmat([1:12]',[2,1]);
+    PctName = flip(sort(repmat(["5th";"50th"],[12,1])));
+%     for h = 1:12
+%         HorizonNames{h} = ['H', num2str(h)];
+%     end
+    for i_var = 1%:length(Model)
         varname = char(Model{i_var});
-        for i_q = 1:length(QQ)
+        ext = {'_lb','_bb','_ub'};
+        for i_q = 1%:length(QQ)
             qq = QQ(i_q);
-            temp = table([{[num2str(qq*100), 'th Percentile Coefficient: ', varname]}, repmat({''}, 1, 11)]);
-            line1_tt = table2array(temp);
+%             line1_tt = cell2table([{[num2str(qq*100), 'th Percentile Coefficient: ', varname]}, repmat({''}, 1, 11)]);
             benchmark_val = transpose(BB_benchmark(:, i_var, i_q));
             std_val = transpose(std_bs(:, i_var, i_q));
             ub_val = benchmark_val + std_val;
             lb_val = benchmark_val - std_val;
-            temp = 
-            data_tt = splitvars(table([ub_val; benchmark_val; lb_val]));
-            data_tt.Properties.VariableNames = HorizonNames;
-            data_tt.Properties.RowNames = {'ub', 'bb', 'lb'};
-            writetable(line1_tt, OutputFile, 'sheet', 'Coefficient_underlying', ...
-                'range', ['A', num2str((5*length(QQ)+1)*(i_var-1) + 5*(i_q-1)+1)], 'WriteRowNames', false, 'WriteVariableNames', false);
-            writetable(data_tt, OutputFile, 'sheet', 'Coefficient_underlying', ...
-                'range', ['A', num2str((5*length(QQ)+1)*(i_var-1) + 5*(i_q-1)+1+1)], 'WriteRowNames', true, 'WriteVariableNames', true);
+            data_tt = array2table([ub_val; benchmark_val; lb_val]');
+            data_tt.Properties.VariableNames = strcat(varname,ext);
+%             data_tt.Properties.RowNames = {'ub', 'bb', 'lb'};
+            writetable(data_tt, OutputFile, 'sheet', 'longCoefficient', 'WriteVariableNames', true);
+%             writetable(line1_tt, OutputFile, 'sheet', 'Coefficient_underlying', ...
+%                 'range', ['A', num2str((5*length(QQ)+1)*(i_var-1) + 5*(i_q-1)+1)], 'WriteRowNames', false, 'WriteVariableNames', false);
+%             writetable(data_tt, OutputFile, 'sheet', 'Coefficient_underlying', ...
+%                 'range', ['A', num2str((5*length(QQ)+1)*(i_var-1) + 5*(i_q-1)+1+1)], 'WriteRowNames', true, 'WriteVariableNames', true);
         end
     end  
     disp('End of update GaR Coefficients! :)')
