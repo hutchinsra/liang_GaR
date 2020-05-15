@@ -43,9 +43,9 @@ function [NewData, OldData, UpdateData] = DataProcess_brookings(aux)
     NFCI_w = table2timetable(TempTable, 'RowTimes', 'date'); %Convert to weekly timetable
     NFCI_q = retime(NFCI_w, 'quarterly', 'mean'); %Convert to quarterly data, taking the mean over the sample period
     DataTable = synchronize(DataTable, NFCI_q); %Merge NFCI_q into DataTable
-    tempfci = DataTable.fci(find(~isnan(DataTable.fci), 1, 'last')-1:end); %The last two non-missing FCI elements and the rest of the FCI vector (15 elements)
+    tempfci = DataTable.fci(find(~isnan(DataTable.fci), 1, 'last')-1:end); %The last two non-missing FCI elements and the rest of the (missing) vector (15 elements total)
     tempnfci = DataTable.NFCI(find(~isnan(DataTable.fci), 1, 'last')-1:end); %The last 15 elements of NFCI
-    
+        
     % append nfci to fci
     for i = 1:length(tempfci)
         if i == 1
@@ -56,6 +56,10 @@ function [NewData, OldData, UpdateData] = DataProcess_brookings(aux)
         end
     end
     DataTable.fci(find(~isnan(DataTable.fci), 1, 'last')-1:end) = newfci;
+    
+    if size(TempTable,2) == 3
+        DataTable.fci = DataTable.CISS;
+    end
     
     % Create Dummy
     OldData = OldData(OldRange, :);

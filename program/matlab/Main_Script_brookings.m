@@ -6,7 +6,7 @@ aux.MatlabPath = [aux.MainPath,'program/matlab/']; %Add matlab file path to aux-
 cd(aux.MatlabPath) %Change pwd to matlab folder
 ENVIROMENT_brookings; %Load in environment variables
 
-aux.InputFileName = 'InputData.xlsx'; %Add the name of raw data file to aux-structure
+aux.InputFileName = 'InputData_CISS.xlsx'; %Add the name of raw data file to aux-structure
 aux.OutputFileName = 'Result.xlsx'; %Add the name of the desired output file to aux-structure
 % do not need to change unless other specification(s) needed
 aux.OldRange = timerange(datetime('1/1/1975', 'InputFormat', 'MM/dd/uuuu'), ...
